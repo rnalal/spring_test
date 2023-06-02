@@ -1,0 +1,14 @@
+20230602
+
+ MVC: Model-View-Controller
+ 
+ Model: application business layer / business logic 처리 + DB 연동 작업
+ 
+ Controller: application의 흐름을 관리하는 layer / View와 Model 간의 interface 역할을 함
+ 			/ View 계층에서 요청을 받고 필요한 유효성 검사를 포함해서 처리함
+ -> 요청은 data 처리를 위해서 Model 계층으로 추가되어서 전송되고,
+ 처리가 되면 data는 Controller로 다시 전송된 후 View에 표시됨.
+ 
+ View: application presentation layer / UI 형식의 응용 프로그램 출력을 나타냄.
+ 		/Presentation layer(View)는 Controller가 가져온 Model data를 표시하는데 사용됨.
+ 		

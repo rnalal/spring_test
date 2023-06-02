@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 					 http://www.springframework.org/schema/beans
+			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
+			 					 http://www.springframework.org/schema/context
+			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+                           
+    <!--
+     scan 한 package 내부의 class 중에서
+     Controller 라는 annotation 이 지정된 class 들을
+     Controller 로 loading 함    
+    -->    
+    <annotation-driven/>
+    
+    <!-- 
+      scan 할 bean 들이 모여 있는 package 지정하기
+     -->
+    <context:component-scan base-package="kr.co.tjoeun.controller"/>
+       
+</beans:beans>
+
+
+
+
+
+
