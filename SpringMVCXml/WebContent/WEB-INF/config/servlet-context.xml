@@ -21,6 +21,18 @@
       scan 할 bean 들이 모여 있는 package 지정하기
      -->
     <context:component-scan base-package="kr.co.tjoeun.controller"/>
+    
+    <!-- 
+    	Controller의 메소드에서 반환하는 문자열의 prefix 와 suffix  경로 정보 설정하기
+     -->
+     <!-- bean: spring에서 자동으로 관리해주는 객체 -->
+     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     	<beans:property name="prefix" value="/WEB-INF/views/" />
+     	<beans:property name="suffix" value=".jsp" />
+     </beans:bean>
+     
+     <!-- 정적 파일 경로 지정하기 -->
+     <resources mapping="spring/**" location="/resources/"></resources>
        
 </beans:beans>
 

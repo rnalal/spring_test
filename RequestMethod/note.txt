@@ -1,0 +1,8 @@
+
+요청 방식 지정하기
+
+Spring MVC는 요청 주소(URL Pattern)별로 메소드를 정의할 수 있고
+				ㄴ @RequestMapping의 value
+			 같은 요청 주소(URL Pattern)에서 요청방식에 따라서 
+			    ㄴ @RequestMapping의 method
+			 메서드를 정의할 수 있음

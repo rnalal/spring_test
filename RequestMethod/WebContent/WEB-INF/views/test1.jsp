@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>여기는 index.jsp입니다.</h1>
+	<h2>여기는 test1.jsp 입니다 (get 방식)</h2>
 </body>
 </html>
