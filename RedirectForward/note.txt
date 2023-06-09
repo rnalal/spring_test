@@ -1,0 +1,41 @@
+
+Code의 흐름
+
+				  -- request(요청) --> 
+Browser(Client) 							Server: 요청정보분석
+			  	 <--  response(응답) --  			응답결과생성
+			  	 
+Spring Framework(MVC)
+  ㄴ 요청이 들어오면 요청 주소(URL)를 분석함
+  	 이 URL과 mapping 된 메소드(Controller 내의 메소드)를 호출함
+  	 이 메소드가 반환하는 정보(return "jsp page(view 이름)")를 기반으로
+  	 응답결과를 생성해서(html(jsp) code) Client(Client 쪽의 Browser) 에게 보냄
+  	 
+ 메소드(Controller 내의 메소드)의 return
+ 	Controller를 통해서 요청 주소(URL)와 Mapping 되어 있는
+ 	메소가  반환하는 값
+ 	
+ 	문자열(view 이름), Model, ModelAndView 객체 등을 반환할 수 있음
+ 		ㄴ Client 쪽 Browser로 전달할 응답결과(response)를 
+ 		   생성하기 위해서 JSP를 지정하는 부분
+ 	 
+ 	 문자열(view 이름), Model, ModelAndView 객체 이외에
+ 	 다른 정보들도 반환할 수 있음
+ 	 
+ 	 
+Redirect(Browser를 거침: Browser에서 Server에 요청(request)을 다시 보냄)
+		: Client에서 새로운 페이지 요청을 응답결과로 전달함
+	ㄴ Client가 Server에게 요청한 것에 대한 응답결과를 전달하는 것
+							request			 response 
+											(Client 쪽의 Browser로 전달)
+		Redirect 는 새로운 요청(request)이 발생하는 것임
+			ㄴ HttpServletRequest 객체가 일단 소멸된 후에
+				새롭게 생성됨							
+				HttpSession 객체는 그대로 유지됨
+					
+				
+Forward (Browser를 거치치 않고 (code의 흐름이) Server 내부에서만 이동함)
+		: code의 흐름이 Serve 상에서만 이동됨 
+ 	ㄴ Browser는 다른 곳으로 흐름이 이동되었다는 것을 인식하지 못함
+ 		ㄴ 주소창의 주소가 변경되지 않음
+ 		ㄴ HttpServletRequest 객체와 HttpSession 객체는 그대로 유지됨						 	  			  	 

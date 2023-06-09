@@ -1,0 +1,17 @@
+
+RequestScope
+
+ ㄴ Client의 Browser로부터
+ 	새로운 요청이 들어와서 응답결과가
+ 	다시 Client의 Browser로 전달될 때까지
+ 	요청(request) 정보가 담겨있는 
+ 	Request 객체를 사용할 수 있음
+ 		<-- 이런 경우의 사용범위를 RequestScope라고 함
+ 		
+ ㄴ HttpServletRequest 객체는
+ 	data 나 객체를 저장할 수 있고 
+ 	RequestScope 내에서 사용할 수 있음
+ 	
+ 	RequestScope에 data를 저장한다는 것의 의미
+ 	 ㄴ request가 들어와서 response를 보낼 때까지 
+ 	 	이 data를 사용하겠다는 것		

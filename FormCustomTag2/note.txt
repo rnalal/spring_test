@@ -1,0 +1,88 @@
+
+  spring-form JSP Tag Library
+  
+  https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/spring-form-tld.html
+  
+  
+  <form:form> 태그
+  
+    ㄴ <form> 태그를 생성함
+       modelAttribute
+         ㄴ form 태그 내의 입력 요소들에 적용된 value 값을 가진 객체이름을 받는 속성
+            modelAttribute 속성에 할당된 값(객체이름)이 form 태그의 id 속성값으로 됨
+            이를 생략하면 command 라는 문자열이 form 태그의 id 속성값으로 설정됨
+            
+       action
+         ㄴ 요청할 주소를 할당받는 속성
+            생략하면 현재 페이지(자기자신 페이지)로 자동으로 설정됨
+            
+       method
+         ㄴ 요청방식을 할당받는 속성
+            생략하면 post 로 설정됨           
+         
+         
+  <form:button> 태그
+  
+    ㄴ submit 버튼을 생성함
+    
+       disabled 속성을 true 로 설정하면 
+       버튼이 비활성화되어서 누르지 못하게 됨
+                ㄴ disabled="disabled"
+  
+  
+  
+  <form:hidden> 태그      
+        
+    ㄴ hidden type 의 input 태그를 생성함       
+       path 속성: id 속성과 name 속성의 역할을 함
+       ㄴ path 속성에 할당된 값은
+          일반 input 태그의 id 속성과 name 속성에 할당됨
+          일반 input 태그의 id 속성과 name 속성의 역할을 함      
+         
+         
+  
+  <form:input> 태그
+  
+    ㄴ type 이 text 인 input 태그를 생성함
+       path 속성: form:form 태그의 modelAttribute 속성에 의해서 추출된
+    (3가지 역할)  model값(HttpServletRequest 객체에 저장된 객체)의 
+                  멤버변수(의 값)를 추출해서 
+                  (input 태그로 변환된)
+                  value 속성에 주입(할당)함       
+                  id 속성과 name 속성의 역할을 함
+       ㄴ path 속성에 할당된 값은
+          일반 input 태그의 id 속성과 name 속성에 할당됨
+          일반 input 태그의 id 속성과 name 속성의 역할을 함  
+    
+    
+  <form:password> 태그
+  
+    ㄴ type 이 password 인 input 태그를 생성함
+       path 속성: form:form 태그의 modelAttribute 속성에 의해서 추출된
+    (3가지 역할)  model값(HttpServletRequest 객체에 저장된 객체)의 
+                  멤버변수(의 값)를 추출해서 
+                  (input 태그로 변환된)
+                  value 속성에 주입(할당)함       
+                  id 속성과 name 속성의 역할을 함
+                  
+       showPassword 속성
+          ㄴ 이 속성을 true 로 해야 password 가 보임
+                         
+    
+       
+  <form:textarea> 태그
+  
+    ㄴ type 이 textarea 인 input 태그를 생성함
+       path 속성: form:form 태그의 modelAttribute 속성에 의해서 추출된
+    (3가지 역할)  model값(HttpServletRequest 객체에 저장된 객체)의 
+                  멤버변수(의 값)를 추출해서 
+                  (input 태그로 변환된)
+                  value 속성에 주입(할당)함 
+    
+    
+    
+    
+  
+  
+  
+  

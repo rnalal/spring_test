@@ -1,0 +1,9 @@
+
+Command Object: 커맨드 객체 <-- HttpServletRequest 객체에 자동으로 담김
+ ㄴ Client 가 전달해 주는 parameter data 를 주입받을 때 사용하는 객체
+    
+    @PostMapping("/test1")
+    public String test1(@ModelAttribute BeanData bean){
+        return "test1";
+    } 
+ 
