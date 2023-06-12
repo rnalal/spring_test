@@ -1,0 +1,39 @@
+
+Session
+
+	browser(client)가 최초로 server에 요청(request)하면
+	brower 당하나씩 메모리 공간을 server에 할당함
+	이 메모리 영역은 brower 당 하나씩 지정되고
+	새로운 요청이 발생해도 같은 메모리 공간을 사용함
+	이러한 메모리 공간을 session이라고 함
+	이 영역은 browser를 종료할 때까지 server에서 사용함
+	browser가 최초로 요청(reqeust)을 보내고
+	browser를 닫을 때까지의 Scope를 SessionScope라고 함
+	SessionScope에서는 session 영역에 저장된
+	data나 객체를 자유롭게 사용할 수 있음
+							ㄴ jsp 화면에서 사용할려면
+							   sessionScope 내장객체를 사용함
+							   
+SessionScope : browser가 최초로 요청(request1)을 발생시켰을 때부터
+			   browser를 닫을 때까지의 범위
+			   session 영역에 data를 저장하면
+			   session scope 안에서 사용할 수 있음							   
+							   
+	
+@SessionAttributes
+	ㄴ session 영역에 저장되어 있는 객체를 사용하라고 할 때 
+	   메소드의 매개변수로 @SessionAttribute를 선언하면
+	   session 영역에 저장된 Bean을 주입 받게 됨
+	   <-- session.getAttribute()를 호출하지 않아도 됨
+	   
+	ㄴ @ModelAttribute를 통해서 주입 받는 Bean은 
+	   자동으로 request 영역에 저장되고 request 영역으로부터 주입 받음
+	   
+	ㄴ 이 경우,	   
+	   @ModelAttribute 를 통해서 주입 받는 Bean을
+	   (Controller 클래스 위에)
+	   @SessionAttributes 로 지정하면 request 영역이 아니라, 
+	   session 영역에 저장되고, session 영역으로부터 주입 받음
+	   
+	ㄴ @ModelAttribute를 활용해서 객체를 생성하고 반환하는 
+	   메소드를 작성해야 함      							   

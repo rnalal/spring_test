@@ -1,0 +1,16 @@
+
+Application Scope
+	Server가 시작될 때부터 종료될 때까지의 범위
+	Application Scope 동안 사용할 수 있는 메모리 영역이 만들어지고
+	ServletContext라는 클래스 타입의 객체로 관리됨
+	
+	ServletContext 에 저장된 data나 객체는
+	Server가 종료되기 전까지, 
+	웹브라우저 별로 별도의 메모리 공간을 사용하는 것이 아니고
+	같은 메모리 공간을 사용함
+	
+	ServletContext
+		Controller에서 주입받음
+		HttpServletRequest 객체의 getServletContext() 메소드를 호출해서 생성함
+		
+	 
