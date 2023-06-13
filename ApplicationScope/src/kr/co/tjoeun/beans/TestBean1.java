@@ -3,6 +3,7 @@ package kr.co.tjoeun.beans;
 public class TestBean1 {
 	private String data1;
 	private String data2;
+	
 	public String getData1() {
 		return data1;
 	}
@@ -17,4 +18,5 @@ public class TestBean1 {
 	}
 	
 	
+
 }

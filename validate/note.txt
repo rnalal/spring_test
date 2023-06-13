@@ -1,0 +1,46 @@
+
+유효성 검사
+
+	Spring MVC 로 처리함
+	Spring MVD 는 JSR-303 규격의 유효성 검사 library 를 사용함
+	Bean 에 data 가 입력될 때 어떤 검사를 할 것인지
+	Annotation 으로 지정함
+		ㄴ 이 Annotation 의 조건에 맞지 않으면 개발자에게 입력값에 오류가 있다는 정보를 전달함
+														
+			pom.xml 에 dependency 추가하기	
+			
+			maven repository 에서 Bean Vaildation API 검색	
+			
+			<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+			<dependency>
+			    <groupId>javax.validation</groupId>
+			    <artifactId>validation-api</artifactId>
+			    <version>2.0.1.Final</version>
+			</dependency>
+								
+								
+			maven repository 에서 Hibernate Validator Engine 검색
+				
+			<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+			<dependency>
+			    <groupId>org.hibernate.validator</groupId>
+			    <artifactId>hibernate-validator</artifactId>
+			    <version>6.1.2.Final</version>
+			</dependency>
+			
+			Bean 에 Annotation 설정하기
+			
+			@Size(min=2, max=10)
+			private String str1;
+			
+			@Max(100)
+			private int data2;
+			
+			
+			
+			
+			
+			
+												
+															
+	

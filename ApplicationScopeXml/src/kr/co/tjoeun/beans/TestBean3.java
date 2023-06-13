@@ -9,6 +9,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 public class TestBean3 {
 	private String data5;
 	private String data6;
+	
 	public String getData5() {
 		return data5;
 	}
@@ -23,4 +24,5 @@ public class TestBean3 {
 	}
 	
 	
+
 }

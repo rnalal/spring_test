@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>test1.jsp</h2>
-	<h3>Application Scope에 data 저장</h3>
+  <h2>test2.jsp</h2>
+  <h3>Application Scope 에 data 올림</h3>
 </body>
 </html>

@@ -1,8 +1,9 @@
 package kr.co.tjoeun.beans;
 
 public class TestBean2 {
-	private String data3;
-	private String data4;
+  private String data3; 
+  private String data4;
+  
 	public String getData3() {
 		return data3;
 	}
@@ -15,4 +16,6 @@ public class TestBean2 {
 	public void setData4(String data4) {
 		this.data4 = data4;
 	}
+  
+  
 }

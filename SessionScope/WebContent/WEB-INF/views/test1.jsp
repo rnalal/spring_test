@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>test1.jsp</h2>
-	<h3>Session 영역에 data 저장완료</h3>
+  <h2>test1.jsp</h2>
+  <h3>session 영역에 data 저장완료</h3>
 </body>
 </html>
