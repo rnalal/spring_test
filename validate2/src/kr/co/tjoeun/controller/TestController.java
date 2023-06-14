@@ -14,7 +14,7 @@ import kr.co.tjoeun.beans.TestBean1;
 public class TestController {
 	
 	@GetMapping("/input_data")
-	public String input_data() {		
+	public String inputData(TestBean1 bean1) {		
 		return "input_data";
 	}
 	

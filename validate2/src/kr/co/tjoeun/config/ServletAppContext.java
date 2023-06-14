@@ -35,10 +35,22 @@ public class ServletAppContext implements WebMvcConfigurer{
 	// properties 파일을 Message 로 등록하기
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
-		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
-		
-		res.setBasenames("/WEB-INF/properties/data1", "/WEB-INF/properties/data2");		
-		
+		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();		
+		res.setBasename("/WEB-INF/properties/error_message");		
 		return res;
-	}		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+
+ JSR-303 어노테이션은 Bean 객체에 주입되는 값에 대한 
+ 유효성 검사를 할 때 제공되는 어노테이션임
+ 
+ @AssertTrue : true 가 아닌 값이 들어오면 오류 발생
+ 
+ @AssertFalse : false 가 아닌 값이 들어오면 오류 발생
+ 
+ @Max(값) : 지정한 값보다 큰 값이 들어오면 오류 발생
+ 
+ @Min(값) : 지정한 값보다 작은 값이 들어오면 오류 발생
+ 
+ @DecimalMax(value=값, inclusive=true/false)
+ 	ㄴ value 에 지정한 값보다 작거나 같은 값이 들어와야 함
+ 	   inclusive 가 false 이면 지정한 값은 포함하지 않음
+ 	    ㄴ 이 경우에는 지정한 값보다 작은 값이 와야 함 (기본값 : true)
+ 	    
+ @DecimalMin(value=값, inclusive=true/false)
+ 	ㄴ value 에 지정한 값보다 크거나 같은 값이 들어와야 함
+ 	   inclusive 가 false 이면 지정한 값은 포함하지 않음
+ 	    ㄴ 이 경우에는 지정한 값보다 큰 값이 와야 함 (기본값 : true) 
+ 	    
+ @Null : 값이 들어오면 오류가 발생함
+ @NotNull : 값이 들어오지 않으면 오류가 발생함
+ 
+ @Digits(integer=정수자릿수, fraction=실수자릿수)
+ 	ㄴ 지정된 자릿수의 숫자가 아닌 경우 오류가 발생함 
+ 
+ @Size(min=글자수, max=글자수)
+ 	ㄴ 지정한 글자수보다 짧거나 길면 오류가 발생함
+ 	
+ @Pattern(regexp=정규식)
+  	ㄴ 주어진 정규식에 어긋나면 오류가 발생함		    	    
