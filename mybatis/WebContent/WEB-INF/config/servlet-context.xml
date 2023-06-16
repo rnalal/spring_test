@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 					 http://www.springframework.org/schema/beans
+			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
+			 					 http://www.springframework.org/schema/context
+			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+                           
+    <!--
+     scan 한 package 내부의 class 중에서
+     Controller 라는 annotation 이 지정된 class 들을
+     Controller 로 loading 함    
+    -->    
+    <annotation-driven/>
+    
+    <!-- 
+      scan 할 bean 들이 모여 있는 package 지정하기
+     -->
+    <context:component-scan base-package="kr.co.tjoeun.controller"/>
+    
+    <!-- 
+    	Controller의 메소드에서 반환하는 문자열의 prefix 와 suffix  경로 정보 설정하기
+     -->
+     <!-- bean: spring에서 자동으로 관리해주는 객체 -->
+     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     	<beans:property name="prefix" value="/WEB-INF/views/" />
+     	<beans:property name="suffix" value=".jsp" />
+     </beans:bean>
+     
+     <!-- 정적 파일 경로 지정하기 -->
+     <resources mapping="spring/**" location="/resources/"></resources>
+     
+     <!-- properties 파일의 내용을 사용할 수 있도록 Bean 을 정의함 -->
+	  <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<beans:property name="location">
+				<beans:value>/WEB-INF/properties/data.properties</beans:value>
+			</beans:property>
+	  </beans:bean>
+	  
+	  <!-- 데이터베이스 접속 정보를 관리하는 객체인 BasicDataSource 클래스를 Bean 으로 정의함  -->
+	  <beans:bean id='basic_data_source' class='org.apache.commons.dbcp2.BasicDataSource'>
+			<beans:property name='driverClassName' value='${db.classname}'/>
+			<beans:property name='url' value='${db.url}'/>
+			<beans:property name='username' value='${db.username}'/>
+			<beans:property name='password' value='${db.password}'/>
+	  </beans:bean>
+	  
+	  <!--  SqlSessionFactoryBean 클래스를 Bean 으로 정의하기 
+	  			ㄴ 데이터베이스 접속 정보와 mapper 파일을 관리하는 Bean -->
+	  <beans:bean id='sqlSession' class='org.mybatis.spring.SqlSessionFactoryBean'>
+			<beans:property name='dataSource' ref='basic_data_source' />
+			<beans:property name='mapperLocations' value='/WEB-INF/mapper/*.xml' />
+	  </beans:bean>	
+	  
+	  <!--  SqlSessionTemplate 클래스를 Bean 으로 정의(등록)하기
+		      ㄴ Query 문을 전달하는 Bean 이며, 
+		         이 Bean 을 주입 받아서 필요한 Query 를 실행하게 됨 -->		   
+	  <beans:bean id='sqlSessionTemplate' class='org.mybatis.spring.SqlSessionTemplate'>
+		  <beans:constructor-arg index='0' ref='sqlSession' />	
+	  </beans:bean> 
+	        
+</beans:beans>
+
+
+
+
+
+

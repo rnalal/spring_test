@@ -1,0 +1,73 @@
+
+Mapper 작성하기
+	ㄴ Mapper 는 Query 문을 작성하는 파일임
+	
+	<mapper namespace = "test_db">
+		<insert id="insert_data" parameterType="kr.co.tjoeun.beans.TestBean">
+		<![CDATA[
+			 insert into springTest (data1, data2, data3) values (#{data1}, #{data2}, #{data3});
+		]]>
+		</insert>
+	</mapper>
+	
+
+
+servlet-context.xml 에서 MyBatis 관련 설정하기
+	
+	1) db.properties 파일에 작성한 Database 정보를 XML 파일에서 사용할 수 있도록 Bean 을 정의함
+	
+		<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<beans:property name="location">
+				<beans:value>/WEB-INF/properties/data.properties</beans:value>
+			</beans:property>
+		</beans:bean>
+		
+	2) 데이터베이스 접속 정보를 관리하는 객체인 BasicDataSource 클래스를 Bean 으로 정의함
+	
+		data.properties 에 작성한 내용
+			
+		db.classname = oracle.jdbc.OracleDriver
+		db.url = jdbc:oracle:thin:@localhost:1521:xe
+		db.username = test1
+		db.password = 1234
+	
+		
+		<beans:bean id="basic_data_source" class="org.apache.commons.dbcp2.BasicDataSource">
+			<beans:property name="driverClassName" value="${db.classname}"/>
+			<beans:property name="url" value="${db.url}"/>
+			<beans:property name="username" value="${db.username}"/>
+			<beans:property name="password" value="${db.password}"/>
+		</beans:bean>
+	
+	
+	3) SqlSessionFactoryBean 클래스를 Bean 으로 정의하기 
+			ㄴ 데이터베이스 접속 정보와 mapper 파일을 관리하는 Bean
+
+		<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<beans:property name="dataSource" value="basic_data_source" />
+			<beans:property name="mapperLocations" value="/WEB-INF/mapper/*.xml" />
+		</beans:bean>	
+		
+	
+	4) SqlSessionTemplate 클래스를 Bean 으로 정의(등록)하기
+		ㄴ Query 문을 전달하는 Bean 이며, 
+		   이 Bean 을 주입 받아서 필요한 Query 를 실행하게 됨
+		   
+		<beans:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+			<beans:constructor-arg index="0" ref="sqlSession" />	
+		</beans:bean>   			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

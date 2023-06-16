@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace = "test_db">
+		<insert parameterType="kr.co.tjoeun.beans.TestBean" id="insert_data" >
+			<![CDATA[
+				 insert into spring_test (data1, data2, data3) values (#{data1}, #{data2}, #{data3})
+			]]>
+		</insert>
+		<select resultType="kr.co.tjoeun.beans.TestBean" id="select_data">
+			<![CDATA[
+				select * from spring_test
+			]]>		
+		</select>
+	</mapper>  
+  
