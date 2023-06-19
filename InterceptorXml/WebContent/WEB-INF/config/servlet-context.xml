@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 					 http://www.springframework.org/schema/beans
+			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
+			 					 http://www.springframework.org/schema/context
+			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+                           
+    <!--
+     scan 한 package 내부의 class 중에서
+     Controller 라는 annotation 이 지정된 class 들을
+     Controller 로 loading 함    
+    -->    
+    <annotation-driven/>
+    
+    <!-- 
+      scan 할 bean 들이 모여 있는 package 지정하기
+     -->
+    <context:component-scan base-package="kr.co.tjoeun.controller"/>
+    
+    <!-- 
+    	Controller의 메소드에서 반환하는 문자열의 prefix 와 suffix  경로 정보 설정하기
+     -->
+     <!-- bean: spring에서 자동으로 관리해주는 객체 -->
+     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     	<beans:property name="prefix" value="/WEB-INF/views/" />
+     	<beans:property name="suffix" value=".jsp" />
+     </beans:bean>
+     
+     <!-- 정적 파일 경로 지정하기 -->
+     <resources mapping="spring/**" location="/resources/"></resources>
+     
+     <!-- interceptor 들을 Bean 으로 등록하기 -->
+     <beans:bean class="kr.co.tjoeun.interceptor.TestInterceptor1" id="inter1" />
+     
+     <interceptors>
+     	<interceptor>
+     		<mapping path="/test1" />
+     		<beans:ref bean="inter1" />
+     	</interceptor>
+     	<interceptor>
+     		<mapping path="/test2" />
+     		<beans:bean class="kr.co.tjoeun.interceptor.TestInterceptor2" />
+     	</interceptor>
+     	<interceptor>
+     		<mapping path="/test2" />
+     		<beans:ref bean="inter1" />
+     	</interceptor>
+     	<interceptor>
+     		<mapping path="/**" />
+     		<beans:bean class="kr.co.tjoeun.interceptor.TestInterceptor3" />
+     	</interceptor>
+     	<interceptor>
+     		<mapping path="/**" />
+     		<exclude-mapping path="/*" />
+     		<beans:bean class="kr.co.tjoeun.interceptor.TestInterceptor3" />
+     	</interceptor>
+     </interceptors>     
+</beans:beans>
+
+
+
+
+
+
