@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/mvc
+			 					 http://www.springframework.org/schema/mvc/spring-mvc.xsd
+			 					 http://www.springframework.org/schema/beans
+			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
+			 					 http://www.springframework.org/schema/context
+			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+                           
+    <!--
+     scan 한 package 내부의 class 중에서
+     Controller 라는 annotation 이 지정된 class 들을
+     Controller 로 loading 함    
+    -->    
+    <annotation-driven/>
+    
+    <!-- 
+      scan 할 bean 들이 모여 있는 package 지정하기
+     -->
+    <context:component-scan base-package="kr.co.tjoeun.controller"/>
+    <context:component-scan base-package="kr.co.tjoeun.dao"/>
+    <context:component-scan base-package="kr.co.tjoeun.service"/>
+    
+    <!-- 
+      Controller 의 메소드에서 반환하는 문자열의 prefix 와 suffix 경로 정보 설정하기
+     -->
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/"/>
+        <beans:property name="suffix" value=".jsp"/>     
+    </beans:bean>
+    
+    <!--  정적 파일 경로 지정하기: HTML 에서 사용하는 이미지, 사운드, js, CSS 등 -->
+    <resources mapping="/**" location="/resources/" />
+       
+    <!--  properties 파일의 내용을 사용하는 Bean 을 정의함 -->
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="location">
+            <beans:value>/WEB-INF/properties/db.properties</beans:value>
+        </beans:property>
+    </beans:bean>
+    
+    <!-- BasicDataSource : 데이터베이스 접속정보를 관리하는 Bean -->
+    <beans:bean class="org.apache.commons.dbcp2.BasicDataSource" id="basic_data_source">
+        <beans:property name="driverClassName" value="${db.classname}" />   
+        <beans:property name="url" value="${db.url}" />   
+        <beans:property name="username" value="${db.username}" />   
+        <beans:property name="password" value="${db.password}" />
+    </beans:bean>   
+    
+    <!-- Query 문과 Database 접속 정보를 관리하는 Bean -->
+    <beans:bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
+        <beans:property name="dataSource" ref="basic_data_source" />
+        <beans:property name="mapperLocations" value="/WEB-INF/mapper/*.xml" />
+    </beans:bean>
+    
+    <!-- Query 문 실행을 위한 Bean(Mapper 관리) -->
+    <beans:bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+        <beans:constructor-arg index="0" ref="sqlSession" />
+    </beans:bean>
+    
+    <!--  interceptor 등록하기 -->
+    <interceptors>
+        <interceptor>
+            <mapping path="/**" />
+            <beans:bean class="kr.co.tjoeun.interceptor.TopMenuInterceptor"/>
+        </interceptor>    
+    </interceptors>
+    
+    <!-- 에러 메세지를 작성한 properties 파일 등록하기 : Message Source 등록하기 -->
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+      <beans:property name="basenames">
+        <beans:list>
+          <beans:value>/WEB-INF/properties/error</beans:value>
+        </beans:list>
+      </beans:property>
+    </beans:bean>
+    
+    <!-- Message 에 접근하는 접근자 등록하기 -->
+    <beans:bean class="org.springframework.context.support.MessageSourceAccessor">
+      <beans:constructor-arg ref="messageSource"/>
+    </beans:bean>
+    
+</beans:beans>
+
+
+
+
+
+

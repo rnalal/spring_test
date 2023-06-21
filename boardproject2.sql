@@ -35,7 +35,15 @@ create table user_table (
     user_pw varchar2(100) not null
 );
 
+select * from user_table;
+select user_name from user_table where user_id = 'abcd';
 
+
+insert into user_table values(user_seq.nextval, '더조은', 'spring', '1234');
+insert into user_table values(user_seq.nextval, '아카데미', 'java', '1234');
+insert into user_table values(user_seq.nextval, '학원', 'python', '1234');
+
+commit;
 
 -- content_table 테이블 생성
 create table content_table (

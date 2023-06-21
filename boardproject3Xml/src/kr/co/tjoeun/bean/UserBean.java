@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class UserBean {
   
-  private int userIdx;
-  private String userName;
-  private String userId;
-  private String userPw;
+  private int user_idx;
+  private String user_name;
+  private String user_id;
+  private String user_pw;
 
 }
