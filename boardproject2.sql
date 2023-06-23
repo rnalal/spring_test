@@ -38,6 +38,10 @@ create table user_table (
 select * from user_table;
 select user_name from user_table where user_id = 'abcd';
 
+select user_idx, user_name from user_table where user_id='spring' and user_pw='1234';
+
+SELECT user_id, user_name FROM user_table WHERE user_idx = '0';
+
 
 insert into user_table values(user_seq.nextval, '더조은', 'spring', '1234');
 insert into user_table values(user_seq.nextval, '아카데미', 'java', '1234');
