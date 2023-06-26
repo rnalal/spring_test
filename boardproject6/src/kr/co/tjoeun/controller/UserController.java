@@ -36,7 +36,7 @@ public class UserController {
 	                  @RequestParam(value="fail", defaultValue="false") boolean fail,
 	                  Model model) {	
 	model.addAttribute("fail", fail);	
-	System.out.println("fail : " + fail);
+	// System.out.println("fail : " + fail);
 	return "user/login";
   }
   
@@ -72,29 +72,33 @@ public class UserController {
 	userService.addUserInfo(joinUserBean);	
 	
 	return "user/join_success";
-  } 
+  }
+  
+  
   
   @GetMapping("/modify")
-  public String modify(@ModelAttribute ("modifyUserBean") UserBean modifyUserBean) {  
+  public String modify(@ModelAttribute("modifyUserBean") UserBean modifyUserBean) {
 	
-	 userService.getModifyUserInfo(modifyUserBean);  
-	  
+	userService.getModifyUserInfo(modifyUserBean);
+	
 	return "user/modify";
   }
   
+  
   @GetMapping("/logout")
   public String logout() {
-	  
+	
 	loginUserBean.setUserLogin(false);
-	  
+	
 	return "user/logout";
   }
   
   @GetMapping("/not_login")
   public String notLogin() {
-	  
-	  return "user/not_login";
+	return "user/not_login";
   }
+  
+  
   
   @InitBinder
   public void initBinder(WebDataBinder binder) {

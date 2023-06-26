@@ -49,32 +49,22 @@ public class UserService {
 	
 	return;
   }   
+ 
   
   public void getModifyUserInfo(UserBean modifyUserBean) {
-	  // tmpModifyUserBean <-- DB 로부터 가져온 user_id, user_name 값을 가지고 있는 UserBean 객체
-	  UserBean tmpModifyUserBean = userDAO.getModifyUserInfo(loginUserBean.getUser_idx());
-	  // tmpModifyUserBean 객제가 가지고 있는 user_id, user_name 값을 
-	  // Spring 이 자동 생성해서 parameter 로 전달해 준 modifyUserBean 객체의
-	  // 멤버변수 user_id, user_name 에 저장함
-	  tmpModifyUserBean.setUser_id(tmpModifyUserBean.getUser_id());
-	  tmpModifyUserBean.setUser_name(tmpModifyUserBean.getUser_name());
-	  
-	  // 현재 로그인한 회원(loginUserBean) 의 index 번호를
-	  // Spring 이 자동 생성해서 parameter 로 전달해 준 modifyUserBean 객체의
-	  // 멤버변수 user_idx 에 저장함
-	  tmpModifyUserBean.setUser_idx(loginUserBean.getUser_idx());
-	  
-	  return;
+	// tmpModifyUserBean <-- DB 로부터 가져온 user_id, user_name 값을 가지고 있는 UserBean 객체
+	UserBean tmpModifyUserBean = userDAO.getModifyUserInfo(loginUserBean.getUser_idx());
+	// tmpModifyUserBean  객체가 가지고 있는 user_id, user_name 값을
+	// Spring 이 자동 생성해서 parameter 로 전달해 준 modifyUserBean 객체의 
+	// 멤버변수 user_id, user_name 에 저장함
+	modifyUserBean.setUser_id(tmpModifyUserBean.getUser_id());
+	modifyUserBean.setUser_name(tmpModifyUserBean.getUser_name());
+	// 현재 로그인한 회원(loginUserBean) 의 index 번호를
+	// Spring 이 자동 생성해서 parameter 로 전달해 준 modifyUserBean 객체의 
+	// 멤버변수 user_idx 에 저장함
+	modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+	
+	return;
+	
   }
- 
 }
-
-
-
-
-
-
-
-
-
-

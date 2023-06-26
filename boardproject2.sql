@@ -42,10 +42,12 @@ select user_idx, user_name from user_table where user_id='spring' and user_pw='1
 
 SELECT user_id, user_name FROM user_table WHERE user_idx = '0';
 
-
 insert into user_table values(user_seq.nextval, '더조은', 'spring', '1234');
 insert into user_table values(user_seq.nextval, '아카데미', 'java', '1234');
 insert into user_table values(user_seq.nextval, '학원', 'python', '1234');
+
+update user_table set user_pw = '4567' where user_idx=1;
+SELECT user_id, user_name FROM user_table WHERE user_idx = 3;
 
 commit;
 
@@ -63,12 +65,20 @@ create table content_table (
 --alter table content_table add constraint pk1 foreign key(content_writer_idx) references user_table(user_idx);
 --alter table content_table add constraint pk2 foreign key(content_board_idx) references board_info_table(board_info_idx);
 
+insert into content_table values(content_seq.nextval, #{content_subject}, #{content_text}, #{content_file}, #{content_writer_idx}, #{content_board_idx}, sysdate);
+
+
+select * from content_table;
+
 commit;
 
 -- sequence 생성
 create sequence user_seq start with 0 increment by 1 minvalue 0;
 create sequence content_seq start with 0 increment by 1 minvalue 0;
 
+
+select * from tabs;
+select * from board_info_table;
 
 
 

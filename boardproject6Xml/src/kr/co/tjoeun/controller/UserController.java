@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ public class UserController {
   
   // loginUserBean : Server 실행될 때 Session Scope 에 생성한 UserBean 객체
   @Resource(name="loginUserBean")
+  @Lazy
   private UserBean loginUserBean;
   
   
@@ -36,7 +38,7 @@ public class UserController {
 	                  @RequestParam(value="fail", defaultValue="false") boolean fail,
 	                  Model model) {	
 	model.addAttribute("fail", fail);	
-	System.out.println("fail : " + fail);
+	// System.out.println("fail : " + fail);
 	return "user/login";
   }
   
@@ -72,27 +74,28 @@ public class UserController {
 	userService.addUserInfo(joinUserBean);	
 	
 	return "user/join_success";
-  } 
+  }
+  
+  
   
   @GetMapping("/modify")
-  public String modify(@ModelAttribute ("modifyUserBean") UserBean userBean) {  
-	  
+  public String modify(@ModelAttribute("modifyUserBean") UserBean userBean) {
 	return "user/modify";
   }
   
   @GetMapping("/logout")
   public String logout() {
-	  
+	
 	loginUserBean.setUserLogin(false);
-	  
+	
 	return "user/logout";
   }
   
   @GetMapping("/not_login")
-  public String notLogin() {
-	  
-	  return "user/not_login";
+  public String notLogin() {	
+	return "user/not_login";
   }
+  
   
   @InitBinder
   public void initBinder(WebDataBinder binder) {

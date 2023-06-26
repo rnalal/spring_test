@@ -1,0 +1,6 @@
+ boardproject8
+ 
+    게시글 작성 및 저장
+    파일 업로드 - StandardServletMultipartResolver 사용           
+    
+    
