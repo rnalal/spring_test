@@ -67,7 +67,7 @@ create table content_table (
 
 insert into content_table values(content_seq.nextval, #{content_subject}, #{content_text}, #{content_file}, #{content_writer_idx}, #{content_board_idx}, sysdate);
 
-
+delete from content_table where content_idx=22;
 select * from content_table;
 
 commit;
@@ -81,7 +81,25 @@ select * from tabs;
 select * from board_info_table;
 
 
+-- 20230627
 
+select board_info_name from board_info_table where board_info_idx=1;
+select board_info_name from board_info_table where board_info_idx=2;
+select board_info_name from board_info_table where board_info_idx=3;
+select board_info_name from board_info_table where board_info_idx=4;
+
+--    글번호             제목             작성자         작성날짜
+-- content_idx    content_subject      user_nsme     content_date
+
+SELECT c.content_idx, c.content_subject, u.user_name content_writer_name, TO_CHAR(c.content_date, 'YYYY-MM-DD') content_date FROM content_table c, user_table u 
+ 			WHERE c.content_writer_idx = u.user_idx AND c.content_board_idx = 1 ORDER BY c.content_idx desc;
+ 
+SELECT u.user_name content_writer_name, TO_CHAR(content_date, 'YYYY-MM-DD') content_date, c.content_subject, c.content_text, c.content_file 
+FROM content_table c, user_table u
+WHERE c.content_writer_idx = u.user_idx and c.content_idx = 9;
+
+-- 현재 sequence 값
+SELECT content_seq.nextval FROM DUAL;
 
 
 

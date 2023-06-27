@@ -25,7 +25,12 @@ public class HomeController {
 		// return "/WEB-INF/views/index.jsp";
 	  
 	    // System.out.println("loginUserBean :" + loginUserBean);
-		
+	  
+	    // upload 폴더를 지정하기 위해서 RealPath 얻어오기
+	    // 이 경로를 option.properties 파일에 path.upload 로 설정함
+	    System.out.println(request.getServletContext().getRealPath("/"));
+	    
+	    
 	    return "redirect:/main";
 		
 		/*

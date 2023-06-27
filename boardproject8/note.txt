@@ -1,6 +1,16 @@
  boardproject8
  
     게시글 작성 및 저장
-    파일 업로드 - StandardServletMultipartResolver 사용           
+    파일 업로드 - StandardServletMultipartResolver 사용
     
+    // WebContent > resources > upload : upload 폴더를 생성한다
+    
+    // HomeController 에 아래의 내용을 작성함
+    // upload 폴더를 지정하기 위해서 RealPath 얻어오기 
+	// 이 경로를 option.properties 파일에 path.upload 로 설정함
+	System.out.println(request.getServletContext().getRealPath("/"));
+	
+	// option.properties 파일
+	path.upload=C:/workspace/springmvc/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/boardproject8Xml/resources/upload
+	     
     

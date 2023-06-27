@@ -18,14 +18,14 @@ import kr.co.tjoeun.service.BoardService;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
+  
   @Autowired
   private BoardService boardService;
   
- @GetMapping("/main")
-  public String boradMain(@RequestParam("board_info_idx")int board_info_idx,
-		  				  Model model) {
-	model.addAttribute("board_info_idx", board_info_idx);  
+  @GetMapping("/main")
+  public String boradMain(@RequestParam("board_info_idx") int board_info_idx,
+	                      Model model) {
+	model.addAttribute("board_info_idx", board_info_idx);	
 	return "board/main";
   }
   
@@ -44,12 +44,14 @@ public class BoardController {
   }
   
   @PostMapping("/write_procedure")
-  public String wrtieProcedure(@Valid @ModelAttribute("writeContentBean") ContentBean writeContentBean,
-		  					   BindingResult result) {
-	  if(result.hasErrors()) {
-		  return "board/write";
-	  }
-	  return "board/write_success";
+  public String writeProcedure(@Valid @ModelAttribute("writeContentBean") ContentBean writeContentBean,
+	                           BindingResult result) {
+	if(result.hasErrors()) {
+	  return "board/write";
+	}
+	boardService.addContentInfo(writeContentBean);
+	
+	return "board/write_success";	
   }
   
   @GetMapping("/modify")

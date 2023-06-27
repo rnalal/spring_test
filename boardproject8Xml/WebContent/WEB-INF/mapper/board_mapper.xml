@@ -3,10 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-	<insert id="addContentInfo" parameterType="kr.co.tjoeun.bean.writeContentBean">
+	<!-- 
+	   content_table 에 insert 하기
+	   #{content_file, jdbcType=VARCHAR} 
+	    ㄴ 이미지를 추가 하지 않으면 content_file 에 들어오는 값이 null 이 되는데
+	       이 때, null 값이 들어와도 오류가 발생하지 않게 하려면 jdbcType=VARCHAR 를 설정함
+	 -->
+    <insert id="addContentInfo" parameterType="kr.co.tjoeun.bean.ContentBean">
 	    <![CDATA[
-	        INSERT INTO content_table(content_idx, content_subject, content_text,content_file, content_writer_idx, content_board_idx, content_date) 
-	        VALUES(content_seq.nextval, #{content_subject}, #{content_text}, #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate)
+	        INSERT INTO content_table(content_idx, content_subject, content_text, content_file, content_writer_idx, content_board_idx, content_date) 
+  	        VALUES(content_seq.nextval, #{content_subject}, #{content_text}, #{content_file, jdbcType=VARCHAR}, #{content_writer_idx}, #{content_board_idx}, sysdate)
 	    ]]>
- 	</insert>
-</mapper>  
+    </insert>
+
+</mapper> 

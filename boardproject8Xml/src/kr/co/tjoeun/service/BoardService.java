@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,8 +26,8 @@ public class BoardService {
   
   // Session Scope 에 있는 UserBean 객체 주입받기
   @Resource(name = "loginUserBean")
+  @Lazy
   private UserBean loginUserBean;
-  
   
   // 파일 업로드 경로
   @Value("${path.upload}")
@@ -72,5 +73,5 @@ public class BoardService {
 	
   } // addContentInfo
   
-
 } // Service Class
+
