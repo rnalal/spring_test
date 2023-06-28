@@ -28,10 +28,19 @@ public class BoardDAO {
 	return sqlSessionTemplate.selectList("board.getContentList",board_info_idx);
   }
   
-  
   //상세페이지에 출력할 데이터 가져오기
   public ContentBean getContentInfo(int content_idx) {
 	return sqlSessionTemplate.selectOne("board.getContentInfo", content_idx);
+  }
+  
+  // 수정 페이지에서 게시글 수정하기
+  public void modifyContentInfo(ContentBean modifyContentBean) {
+	  sqlSessionTemplate.update("board.modifyContentInfo", modifyContentBean);
+  }
+  
+  // 게시글 삭제하기
+  public void deleteContentInfo(int content_idx) {
+	  sqlSessionTemplate.delete("board.deleteContentInfo", content_idx);
   }
 
 }

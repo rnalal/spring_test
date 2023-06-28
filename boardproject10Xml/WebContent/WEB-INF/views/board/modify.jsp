@@ -26,6 +26,7 @@
 				<div class="card-body">
 					<form:form action="${root }board/modify_procedure" method="post" modelAttribute="modifyContentBean" enctype="multipart/form-data">
 						<form:hidden path="content_idx" />
+						<!-- <input type="hidden" id="content_idx" name="content_idx" value="content_idx" /> -->
 						<form:hidden path="content_board_idx" />
 						<div class="form-group">
 							<form:label path="content_writer_name">작성자</form:label>
@@ -49,6 +50,7 @@
 							<form:label path="upload_file">첨부 이미지</form:label>
 							<c:if test="${modifyContentBean.content_file != null }">
 								<img src="${root }upload/${modifyContentBean.content_file}" width="100%"/>	
+								<form:hidden path="content_file" />
 							</c:if>
 							<form:input type="file" path="upload_file" class="form-control" accept="image/*"/>					
 						</div>

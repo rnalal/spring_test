@@ -91,5 +91,23 @@ public class BoardService {
 	
   }
   
+  // 수정 페이지에서 게시글 수정하기
+  public void modifyContentInfo(ContentBean modifyContentBean) {
+	  
+	  MultipartFile upload_file = modifyContentBean.getUpload_file();
+	  
+	  if(upload_file.getSize() > 0) {
+		  String file_name = saveUploadFile(upload_file);
+		  modifyContentBean.setContent_file(file_name);
+	  }
+	  
+	  boardDAO.modifyContentInfo(modifyContentBean);
+  }
+  
+  // 게시글 삭제하기
+  public void deleteContentInfo(int content_idx) {
+	  boardDAO.deleteContentInfo(content_idx);
+  }
+  
 } // Service Class
 

@@ -85,13 +85,44 @@ public class BoardController {
 	model.addAttribute("board_info_idx", board_info_idx);
 	model.addAttribute("content_idx", content_idx);
 	
+	ContentBean tmpContentBean = boardService.getContentInfo(content_idx);
+	
+	modifyContentBean.setContent_writer_name(tmpContentBean.getContent_writer_name());
+	modifyContentBean.setContent_date(tmpContentBean.getContent_date());
+	modifyContentBean.setContent_subject(tmpContentBean.getContent_subject());
+	modifyContentBean.setContent_text(tmpContentBean.getContent_text());
+	modifyContentBean.setContent_file(tmpContentBean.getContent_file());
+	modifyContentBean.setContent_writer_idx(tmpContentBean.getContent_writer_idx());
+	modifyContentBean.setContent_board_idx(board_info_idx);
+	modifyContentBean.setContent_idx(content_idx);
+	
 	return "board/modify";
   }
   
+  @PostMapping("/modify_procedure")
+  public String modifyProcedure(@Valid @ModelAttribute("modifyContentBean") ContentBean modifyContentBean,
+		  	 					BindingResult result) {
+	  
+	  if(result.hasErrors()) {
+		  return "board/modify";
+	  }
+	  
+	  boardService.modifyContentInfo(modifyContentBean);
+	  
+	  return "board/modify_success"; 
+	  
+  }
+  
   @GetMapping("/delete")
-  public String boradDelete() {
+  public String boradDelete(@RequestParam("board_info_idx") int board_info_idx,
+		  					@RequestParam("content_idx") int content_idx,
+		  					Model model) {
+	boardService.deleteContentInfo(content_idx); 
+	model.addAttribute("board_info_idx", board_info_idx);	    
+	  
 	return "board/delete";
   }
+  
   
   @GetMapping("/not_writer")
   public String notWriter() {

@@ -33,4 +33,23 @@ public class BoardDAO {
 	  return boardMapper.getContentInfo(content_idx);
   }
 
+  // 수정 페이지에서 게시글 수정하기
+  public void modifyContentInfo(ContentBean modifyContentBean) {
+	  boardMapper.modifyContentInfo(modifyContentBean);
+  }
+  
+  // 게시글 삭제하기
+  public void deleteContentInfo(int content_idx) {
+	  boardMapper.deleteContentInfo(content_idx);
+  }
 }
+
+
+
+
+
+
+
+
+
+

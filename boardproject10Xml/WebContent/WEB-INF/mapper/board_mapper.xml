@@ -64,5 +64,40 @@
 	  	      AND c.content_idx = ${content_idx}
 	    ]]>
 	</select>
+	
+	<!-- 상세보기 페이지에서 수정버튼 눌렀을 때 게시글 수정하기 -->
+	<update id="modifyContentInfo" parameterType="kr.co.tjoeun.bean.ContentBean">
+		<![CDATA[
+			UPDATE content_table SET content_subject=#{content_subject}, content_text=#{content_text}, content_file=#{content_file, jdbcType=VARCHAR} WHERE content_idx=#{content_idx}
+		]]>	
+	</update>
+	
+	<!-- 상세보기 파이지에서 삭제버튼 눌렀을 때 게시글 삭제하기 -->
+	<delete id="deleteContentInfo" parameterType="java.lang.Integer" >
+		<![CDATA[
+			DELETE FROM content_table WHERE content_idx = #{content_idx}
+		]]>
+	</delete>
 
-</mapper> 
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+

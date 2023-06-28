@@ -67,7 +67,7 @@ create table content_table (
 
 insert into content_table values(content_seq.nextval, #{content_subject}, #{content_text}, #{content_file}, #{content_writer_idx}, #{content_board_idx}, sysdate);
 
-delete from content_table where content_idx=22;
+delete from content_table where content_idx=32;
 select * from content_table;
 
 commit;
@@ -100,6 +100,9 @@ WHERE c.content_writer_idx = u.user_idx and c.content_idx = 9;
 
 -- 현재 sequence 값
 SELECT content_seq.nextval FROM DUAL;
+
+-- 전체 글 개수
+SELECT count(*) FROM content_table WHERE content_board_idx = 2;
 
 
 
