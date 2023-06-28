@@ -3,5 +3,5 @@
 <c:set var="root" value="${pageContext.request.contextPath }/" /> 
 <script>
   alert("작성하신 게시글이 게시되었습니다");
-  location.href = "${root}board/read?board_info_idx=${writeContentBean.content_board_idx}&content_idx=${writeContentBean.content_idx}";
+  location.href = "${root}board/read?board_info_idx=${writeContentBean.content_board_idx}&content_idx=${writeContentBean.content_idx}&page=${page}";
 </script>
