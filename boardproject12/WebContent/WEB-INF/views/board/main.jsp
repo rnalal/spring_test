@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- localhost(127.0.0.1):portnumber/projectname : Context Path -->
+<!-- <c:url var="root" value="/" /> -->   
 <c:set var="root" value="${pageContext.request.contextPath }/" />   
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,7 @@
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
 		<div class="card-body">
-			<h4 class="card-title">${boardInfoName }</h4>
+			<h4 class="card-title">${requestScope.boardInfoName }</h4>
 			<table class="table table-hover" id='board_list'>
 				<thead>
 					<tr>
@@ -32,65 +34,67 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="contentBean" items="${contentList }">
-						<tr>
+				    <c:forEach var="contentBean"  items="${contentList }">
+					    <tr>
 							<td class="text-center d-none d-md-table-cell">${contentBean.content_idx }</td>
-							<td><a href="${root }board/read?board_info_idx=${board_info_idx}&content_idx=${contentBean.content_idx}&page=${page}">${contentBean.content_subject }</a></td>
+							<td><a href= "${root }board/read?board_info_idx=${board_info_idx}&content_idx=${contentBean.content_idx}&page=${page}">${contentBean.content_subject }</a></td>
 							<td class="text-center d-none d-md-table-cell">${contentBean.content_writer_name }</td>
-							<td class="text-center d-none d-md-table-cell">${contentBean.content_date }</td>
-							
+							<td class="text-center d-none d-md-table-cell">${contentBean.content_date }</td>						
 						</tr>
-					</c:forEach>
+				    </c:forEach>				
 				</tbody>
 			</table>
 			
 			<div class="d-none d-md-block">
 				<ul class="pagination justify-content-center">
-					<c:choose>
-						<c:when test="${pageBean.prevPage <= 0}">
-							<li class="page-item disabled">
+				    <c:choose>
+				        <c:when test="${pageBean.prevPage <= 0 }" >
+					        <li class="page-item disabled">
 								<a href="#" class="page-link">이전</a>
 							</li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}board/main?board_info_idx=${board_info_idx}&page=${pageBean.prevPage}" class="page-link">이전</a>
-							</li>
-						</c:otherwise>
-					</c:choose>					
+				        </c:when>
+				        <c:otherwise>
+					        <li class="page-item">
+								<a href="${root}board/main?board_info_idx=${board_info_idx }&page=${pageBean.prevPage}" class="page-link">이전</a>
+							</li>				        
+				        </c:otherwise>
+				    </c:choose>
+					
+					
 					<c:forEach var="idx" begin="${pageBean.min}" end="${pageBean.max}">
-						<c:choose>
-							<c:when test="${idx == pageBean.currentPage}">	
-								<li class="page-item active">
-									<a href="${root}board/main?board_info_idx=${board_info_idx}&page=${idx}" class="page-link">${idx}</a>
-								</li>								
-							</c:when>
-							<c:otherwise>
-								<li class="page-item">
-									<a href="${root}board/main?board_info_idx=${board_info_idx}&page=${idx}" class="page-link">${idx}</a>
-								</li>	
-							</c:otherwise>
-						</c:choose>
+					    <c:choose>
+					        <c:when test="${idx == pageBean.currentPage }">
+							    <li class="page-item active">
+									<a href="${root}board/main?board_info_idx=${board_info_idx }&page=${idx}" class="page-link">${idx}</a>
+								</li>
+					        </c:when>
+					        <c:otherwise>
+							    <li class="page-item">
+									<a href="${root}board/main?board_info_idx=${board_info_idx }&page=${idx}" class="page-link">${idx}</a>
+								</li>
+					        </c:otherwise>
+					    </c:choose>					
 						
 					</c:forEach>
 					
 					<c:choose>
-						<c:when test="${pageBean.max >= pageBean.pageCnt }">
+					    <c:when test="${pageBean.max >= pageBean.pageCnt }">
 							<li class="page-item disabled">
 								<a href="#" class="page-link">다음</a>
 							</li>
-						</c:when>
-						<c:otherwise>
+					    </c:when>
+					    <c:otherwise>
 							<li class="page-item">
-								<a href="${root}board/main?board_info_idx=${board_info_idx}&page=${pageBean.nextPage}" class="page-link">다음</a>
+								<a href="${root}board/main?board_info_idx=${board_info_idx }&page=${pageBean.nextPage}" class="page-link">다음</a>
 							</li>
-						</c:otherwise>
+					    </c:otherwise>
 					</c:choose>
 					
 				</ul>
 			</div>
+			
 			<div class="text-right">
-				<a href="${root }board/write?board_info_idx=${board_info_idx}" class="btn btn-primary">글쓰기</a>
+				<a href="${root }board/write?board_info_idx=${board_info_idx}&page=${page}" class="btn btn-primary">글쓰기</a>
 			</div>
 			
 		</div>

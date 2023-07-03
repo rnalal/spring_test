@@ -14,57 +14,44 @@ public class BoardDAO {
   
   @Autowired
   private BoardMapper boardMapper;
-
-/* 
- // 페이징 처리 테스트 위해서 대량 게시글 업로드  
-  public void addContentInfo(ContentBean writeContentBean) {
-	for(int i = 0; i < 564; i++) {
-		boardMapper.addContentInfo(writeContentBean);
-	}
-  }
-*/
   
   public void addContentInfo(ContentBean writeContentBean) {
-		boardMapper.addContentInfo(writeContentBean);
+	  // 이곳에 for문을 사용하면 더미게시글을 올려서 paging 연습을 할 수 있음
+	  //for(int i = 0; i < 658; i++) {
+	    boardMapper.addContentInfo(writeContentBean);
+	  //}
   }
   
-  // 게시판 index 로 게시판 이름 가져오기(조회하기)  <-- select
+  //게시판 index 로 게시판 이름 가져오기(조회하기)  <-- SELECT
   public String getBoardInfoName(int board_info_idx) {
-	  return boardMapper.getBoardInfoName(board_info_idx);
+	return boardMapper.getBoardInfoName(board_info_idx);
   }
   
   // 게시글 리스트 가져오기
   public List<ContentBean> getContentList(int board_info_idx, RowBounds rowBounds){
-	  return boardMapper.getContentList(board_info_idx, rowBounds);
+	return boardMapper.getContentList(board_info_idx, rowBounds);
   }
   
-  // 상세페이지에 출력할 데이터 가져오기
+  //상세페이지에 출력할 데이터 가져오기
   public ContentBean getContentInfo(int content_idx) {
-	  return boardMapper.getContentInfo(content_idx);
+	return boardMapper.getContentInfo(content_idx);
   }
-
+  
   // 수정 페이지에서 게시글 수정하기
   public void modifyContentInfo(ContentBean modifyContentBean) {
-	  boardMapper.modifyContentInfo(modifyContentBean);
+	boardMapper.modifyContentInfo(modifyContentBean);
   }
   
   // 게시글 삭제하기
   public void deleteContentInfo(int content_idx) {
-	  boardMapper.deleteContentInfo(content_idx);
+	boardMapper.deleteContentInfo(content_idx);
   }
   
-  // 게시글 전체 개수 가져오기
+  // 게시글 전체 개수 가져오기 
   public int getContentCnt(int content_board_idx) {
-	 return boardMapper.getContentCnt(content_board_idx);
+	return boardMapper.getContentCnt(content_board_idx);
   }
+
 }
-
-
-
-
-
-
-
-
 
 

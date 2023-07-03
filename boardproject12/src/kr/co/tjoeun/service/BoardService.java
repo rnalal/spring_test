@@ -30,7 +30,6 @@ public class BoardService {
   @Resource(name = "loginUserBean")
   private UserBean loginUserBean;
   
-  
   // 파일 업로드 경로
   @Value("${path.upload}")
   private String pathUpload;
@@ -57,19 +56,19 @@ public class BoardService {
  
     
   public void addContentInfo(ContentBean writeContentBean) {
-	/*
+	
 	System.out.println(writeContentBean.getContent_subject());
 	System.out.println(writeContentBean.getContent_text());
 	System.out.println(writeContentBean.getUpload_file().getSize());
 	System.out.println(writeContentBean.getUpload_file());
-	*/
-	MultipartFile uploadFile =  writeContentBean.getUpload_file();
 	
-	if(uploadFile.getSize() > 0) {	
+	MultipartFile upload_file =  writeContentBean.getUpload_file();
+	
+	if(upload_file.getSize() > 0) {	
   	  // 파일 이름
-  	  String fileName = saveUploadFile(uploadFile);
-  	  System.out.println("fileName : " + fileName);
-  	  writeContentBean.setContent_file(fileName);
+  	  String file_name = saveUploadFile(upload_file);
+  	  System.out.println("file_name : " + file_name);
+  	  writeContentBean.setContent_file(file_name);
 	}
 	
 	// 현재 로그인 상태인 사람이 작성자가 됨
@@ -84,71 +83,69 @@ public class BoardService {
 	
   } // addContentInfo
   
-  // 게시판 index 로 게시판 이름 가져오기(조회하기) 	<-- select
+  //게시판 index 로 게시판 이름 가져오기(조회하기)  <-- SELECT
   public String getBoardInfoName(int board_info_idx) {
-	  return boardDAO.getBoardInfoName(board_info_idx);
+	return boardDAO.getBoardInfoName(board_info_idx);
+	
   } // getBoardInfoName
   
   // 게시글 리스트 가져오기
   public List<ContentBean> getContentList(int board_info_idx, int page){
-		  
-	  /*
-	   page      pagenation number
-	   	1    ->        0 (start) ◀ page - 1
-	   	2    ->        10
-	   	3    ->        20 
-	   	
-	  */
-	   int start = (page - 1) * pageListcnt;
-	   RowBounds rowBounds = new RowBounds(start, pageListcnt);
-	   
-	   return boardDAO.getContentList(board_info_idx, rowBounds);
+	/*
+	 page   pagination number
+	   1 -> 0 (start)  <- (page - 1) * pageListcnt(10)
+	   2 -> 10  
+	   3 -> 20  
+	*/
+	int start = (page - 1) * pageListcnt;
+	RowBounds rowBounds = new RowBounds(start, pageListcnt);
+	
+	return boardDAO.getContentList(board_info_idx, rowBounds);	
   }
   
   // 상세페이지에 출력할 데이터 가져오기
   public ContentBean getContentInfo(int content_idx) {
-	  return boardDAO.getContentInfo(content_idx);
+	return boardDAO.getContentInfo(content_idx);
+
   }
   
   // 수정 페이지에서 게시글 수정하기
   public void modifyContentInfo(ContentBean modifyContentBean) {
-	  
-	  MultipartFile upload_file = modifyContentBean.getUpload_file();
-	  
-	  if(upload_file.getSize() > 0) {
-		  String file_name = saveUploadFile(upload_file);
-		  modifyContentBean.setContent_file(file_name);
-	  }
-	  
-	  boardDAO.modifyContentInfo(modifyContentBean);
+	
+	MultipartFile upload_file = modifyContentBean.getUpload_file();
+	
+	if(upload_file.getSize() > 0) {
+	  String file_name = saveUploadFile(upload_file);
+	  modifyContentBean.setContent_file(file_name);
+	}
+	
+	boardDAO.modifyContentInfo(modifyContentBean);
   }
   
   // 게시글 삭제하기
   public void deleteContentInfo(int content_idx) {
-	  boardDAO.deleteContentInfo(content_idx);
+	boardDAO.deleteContentInfo(content_idx);
   }
   
-  // 게시글 전체 개수 가져오기
+  // 게시글 전체 개수 가져오기 
   // Controller 로부터 int content_board_idx, int currentPage 값을 받아옴
   // pageListcnt : 페이지당 게시글의 개수
   // pagePaginationcnt : 페이지 버튼 개수
-  public PageBean getContentCnt(int content_board_idx, int currentPage) {	  
-	 // 게시글 전체 개수 
-	 int contentCnt = boardDAO.getContentCnt(content_board_idx);
-	 
-	 PageBean pageBean = new PageBean(contentCnt, currentPage, pageListcnt, pagePaginationcnt);
-	 
-	 return pageBean;
+  public PageBean getContentCnt(int content_board_idx, int currentPage) {
+	// 게시글 전체 개수
+	int contentCnt = boardDAO.getContentCnt(content_board_idx);
+                            	  // 생성자의 parameter
+                            	  // 전체글 개수, 현재 페이지 번호, 페이지당 글개수, 페이지 버튼 개수
+	PageBean pageBean = new PageBean(contentCnt, currentPage, pageListcnt, pagePaginationcnt); 
+	
+	return pageBean;
   }
+
+
+  
+  
   
 } // Service Class
-
-
-
-
-
-
-
 
 
 

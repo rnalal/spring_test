@@ -67,8 +67,6 @@ public class ServletAppContext implements WebMvcConfigurer{
   @Autowired
   private BoardService boardService;
   
-  
-	
 	// Controller 의 메소드에서 반환하는 문자열의 prefix 와 suffix 경로 정보 설정하기
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {	
@@ -161,9 +159,11 @@ public class ServletAppContext implements WebMvcConfigurer{
     reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
     reg2.excludePathPatterns("/board/main");
     
-    CheckWriterInterceptor checkWriterInterceptor = new CheckWriterInterceptor(loginUserBean, boardService);
+    CheckWriterInterceptor checkWriterInterceptor 
+      = new CheckWriterInterceptor(loginUserBean, boardService);
     InterceptorRegistration reg3 = registry.addInterceptor(checkWriterInterceptor);
     reg3.addPathPatterns("/board/modify", "/board/delete");
+    
     
   }
   
@@ -187,6 +187,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	return new StandardServletMultipartResolver();	
   }
 	
+  
+  
+  
 }
 
 
